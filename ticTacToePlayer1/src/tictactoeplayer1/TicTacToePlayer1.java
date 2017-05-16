@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tictactoeplayer;
+package tictactoeplayer1;
 
 /**
  *
  * @author Asus1
- */
+ */ 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -17,7 +17,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class TicTacToePlayer2 {
+public class TicTacToePlayer1 {
 
     /**
      * @param args the command line arguments
