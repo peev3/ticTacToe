@@ -8,7 +8,7 @@ package tictactoeserver;
 /**
  *
  * @author Asus2
- */ 
+ */
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -41,7 +41,7 @@ public class TicTacToeServer {
             mesage1 = inPlayer1.readLine();
             outPlayer2.println(mesage1);
             System.out.println(mesage1);
-            
+
             mesage2 = inPlayer2.readLine();
             outPlayer1.println(mesage2);
             System.out.println(mesage2);
