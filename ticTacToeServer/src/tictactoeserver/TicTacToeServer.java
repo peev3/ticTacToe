@@ -7,7 +7,7 @@ package tictactoeserver;
 
 /**
  *
- * @author Asus
+ * @author Asus2
  */
 public class TicTacToeServer {
 

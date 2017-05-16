@@ -7,7 +7,7 @@ package tictactoeplayer;
 
 /**
  *
- * @author Asus
+ * @author Asus1
  */
 public class TicTacToePlayer {
 
