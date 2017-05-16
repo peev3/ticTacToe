@@ -16,6 +16,7 @@ import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 public class TicTacToePlayer2 {
 
@@ -27,14 +28,15 @@ public class TicTacToePlayer2 {
         int portNumber = 8050;
 
         try {
+            Scanner stdIn = new Scanner(System.in);
             Socket serverSocket = new Socket(InetAddress.getByName("localhost"), portNumber);
             PrintWriter out = new PrintWriter(serverSocket.getOutputStream());
             BufferedReader in = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
-            BufferedReader stdIn = new BufferedReader(new InputStreamReader(System.in));
-
-            String userInput = stdIn.readLine();
-            out.println(userInput);
-            System.out.println("P1: " + in.readLine());
+            while (true) {
+                String userInput = stdIn.next();
+                out.println(userInput);
+                System.out.println("P1: " + in.readLine());
+            }
 
         } catch (UnknownHostException e) {
             System.err.println("Don't know about host " + InetAddress.getByName("localhost"));

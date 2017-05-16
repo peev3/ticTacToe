@@ -36,6 +36,7 @@ public class TicTacToeServer {
             PrintWriter outPlayer1 = new PrintWriter(clientSocket1.getOutputStream());
             PrintWriter outPlayer2 = new PrintWriter(clientSocket2.getOutputStream());
 
+            while(true){
             String mesage1, mesage2;
 
             mesage1 = inPlayer1.readLine();
@@ -44,7 +45,7 @@ public class TicTacToeServer {
 
             mesage2 = inPlayer2.readLine();
             outPlayer1.println(mesage2);
-            System.out.println(mesage2);
+            System.out.println(mesage2);}
 
         } catch (IOException e) {
             System.out.println("Exception caught when trying to listen on port "
