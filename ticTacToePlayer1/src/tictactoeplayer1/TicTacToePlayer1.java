@@ -9,13 +9,9 @@ package tictactoeplayer1;
  *
  * @author Asus1
  */
-import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -25,6 +21,7 @@ public class TicTacToePlayer1 {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
 
@@ -37,16 +34,11 @@ public class TicTacToePlayer1 {
             DataOutputStream fout = new DataOutputStream(serverSocket.getOutputStream());
 
             while (true) {
-                String input, output;
-
-                if ((input = stdIn.next()) != null) {
+                String input;
+                if ((input = stdIn.nextLine()) != null) {
                     fout.writeUTF(input);
                 }
-
-                if ((output = fin.readUTF()) != null) {
-                    System.out.println("P2: " + output);
-                }
-
+                System.out.println("P2: " + fin.readUTF());
             }
 
         } catch (UnknownHostException e) {

@@ -44,11 +44,11 @@ public class TicTacToeServer {
 
                 if ((mesage1 = fin1.readUTF()) != null) {
                     fout2.writeUTF(mesage1);
-                    System.out.println("Player1 " + mesage1);
+                    //System.out.println("Player1 " + mesage1);
                 }
                 if ((mesage2 = fin2.readUTF()) != null) {
                     fout1.writeUTF(mesage2);
-                    System.out.println("player2 " + mesage2);
+                    //System.out.println("player2 " + mesage2);
                 }
             }
 
