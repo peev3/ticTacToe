@@ -10,6 +10,8 @@ package tictactoeplayer2;
  * @author Asus1
  */
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -26,16 +28,24 @@ public class TicTacToePlayer2 {
     public static void main(String[] args) throws IOException {
 
         int portNumber = 8050;
-
         try {
-            Scanner stdIn = new Scanner(System.in);
             Socket serverSocket = new Socket(InetAddress.getByName("localhost"), portNumber);
-            PrintWriter out = new PrintWriter(serverSocket.getOutputStream());
-            BufferedReader in = new BufferedReader(new InputStreamReader(serverSocket.getInputStream()));
+            Scanner stdIn = new Scanner(System.in);
+
+            DataInputStream fin = new DataInputStream(serverSocket.getInputStream());
+            DataOutputStream fout = new DataOutputStream(serverSocket.getOutputStream());
+
             while (true) {
-                String userInput = stdIn.next();
-                out.println(userInput);
-                System.out.println("P1: " + in.readLine());
+                String input, output;
+
+                if ((input = stdIn.next()) != null) {
+                    fout.writeUTF(input);
+                }
+
+                if ((output = fin.readUTF()) != null) {
+                    System.out.println("P1: " + output);
+                }
+
             }
 
         } catch (UnknownHostException e) {

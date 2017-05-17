@@ -10,6 +10,8 @@ package tictactoeserver;
  * @author Asus2
  */
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -30,22 +32,25 @@ public class TicTacToeServer {
             Socket clientSocket1 = serverSocket.accept();
             Socket clientSocket2 = serverSocket.accept();
 
-            BufferedReader inPlayer1 = new BufferedReader(new InputStreamReader(clientSocket1.getInputStream()));
-            BufferedReader inPlayer2 = new BufferedReader(new InputStreamReader(clientSocket2.getInputStream()));
+            DataInputStream fin1 = new DataInputStream(clientSocket1.getInputStream());
+            DataOutputStream fout1 = new DataOutputStream(clientSocket1.getOutputStream());
 
-            PrintWriter outPlayer1 = new PrintWriter(clientSocket1.getOutputStream());
-            PrintWriter outPlayer2 = new PrintWriter(clientSocket2.getOutputStream());
+            DataInputStream fin2 = new DataInputStream(clientSocket2.getInputStream());
+            DataOutputStream fout2 = new DataOutputStream(clientSocket2.getOutputStream());
 
-            while(true){
             String mesage1, mesage2;
 
-            mesage1 = inPlayer1.readLine();
-            outPlayer2.println(mesage1);
-            System.out.println(mesage1);
+            while (true) {
 
-            mesage2 = inPlayer2.readLine();
-            outPlayer1.println(mesage2);
-            System.out.println(mesage2);}
+                if ((mesage1 = fin1.readUTF()) != null) {
+                    fout2.writeUTF(mesage1);
+                    System.out.println("Player1 " + mesage1);
+                }
+                if ((mesage2 = fin2.readUTF()) != null) {
+                    fout1.writeUTF(mesage2);
+                    System.out.println("player2 " + mesage2);
+                }
+            }
 
         } catch (IOException e) {
             System.out.println("Exception caught when trying to listen on port "
