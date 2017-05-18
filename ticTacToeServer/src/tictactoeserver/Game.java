@@ -8,7 +8,6 @@ package tictactoeserver;
 import java.util.Scanner;
 
 /**
- *
  * @author Asus
  */
 public class Game {
