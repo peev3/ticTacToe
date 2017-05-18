@@ -5,8 +5,7 @@
  */
 package tictactoeplayer2;
 
-/**aaaaaaaaaab
- *
+/**
  * @author Asus1
  */
 import java.io.DataInputStream;
@@ -35,10 +34,11 @@ public class TicTacToePlayer2 {
 
             while (true) {
                 String input;
-                if ((input = stdIn.nextLine()) != null) {
+                if (stdIn.hasNext() != false) {
+                    input = stdIn.next();
                     fout.writeUTF(input);
                 }
-                System.out.println("P1: " + fin.readUTF());
+                System.out.println("P2: " + fin.readUTF());
             }
 
         } catch (UnknownHostException e) {

@@ -5,16 +5,12 @@
  */
 package tictactoeserver;
 
-/**aaaaaaaaaaaaaaaaab
- *
+/**
  * @author Asus2
  */
-import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -22,36 +18,73 @@ public class TicTacToeServer {
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
     public static void main(String[] args) throws IOException {
 
         int portNumber = 8050;
 
         try {
+            //server initialize
             ServerSocket serverSocket = new ServerSocket(8050);
             Socket clientSocket1 = serverSocket.accept();
             Socket clientSocket2 = serverSocket.accept();
-
+            
+            // I/O streams
             DataInputStream fin1 = new DataInputStream(clientSocket1.getInputStream());
             DataOutputStream fout1 = new DataOutputStream(clientSocket1.getOutputStream());
-
             DataInputStream fin2 = new DataInputStream(clientSocket2.getInputStream());
             DataOutputStream fout2 = new DataOutputStream(clientSocket2.getOutputStream());
-
-            String mesage1, mesage2;
-
+            
+            
+            //Game variables
+            Game game = new Game();
+            Integer player = 1;
+            Integer x1 = 0, y1 = 0, x2 = 0, y2 = 0;
+            String p1, p2;
+            
+            
             while (true) {
 
-                if ((mesage1 = fin1.readUTF()) != null) {
-                    fout2.writeUTF(mesage1);
-                    //System.out.println("Player1 " + mesage1);
+                //Read Input
+                if (player % 2 == 0) {
+                    p2 = fin1.readUTF();
+                    System.out.println(p2);
+                    x2 = p2.charAt(0) - '0';
+                    y2 = p2.charAt(1) - '0';
+                    fout2.writeUTF("");
+                    System.out.println(x2 + " " + y2);
+                } else {
+                    p1 = fin2.readUTF();
+                    System.out.println(p1);
+                    x1 = p1.charAt(0) - '0';
+                    y1 = p1.charAt(1) - '0';
+                    fout1.writeUTF("");
+                    System.out.println(x1 + " " + y1);
                 }
-                if ((mesage2 = fin2.readUTF()) != null) {
-                    fout1.writeUTF(mesage2);
-                    //System.out.println("player2 " + mesage2);
+                game.showBoard();
+
+                //Player move
+                if (player % 2 == 0) {
+                    game.setBoard(x2, y2, 2);
+                    player++;
+                } else {
+                    game.setBoard(x1, y1, 1);
+                    player++;
+                }
+                
+                
+                if (game.endGame() != 0) {
+                    game.showBoard();
+                    int winner = game.endGame();
+                    if (winner == 1 || winner == 2) {
+                        System.out.println(winner + " won ");
+                    } else {
+                        System.out.println("Draw");
+                    }
+                    break;
                 }
             }
-
         } catch (IOException e) {
             System.out.println("Exception caught when trying to listen on port "
                     + portNumber + " or listening for a connection");
