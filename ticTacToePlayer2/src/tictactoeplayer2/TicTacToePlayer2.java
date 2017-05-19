@@ -38,7 +38,19 @@ public class TicTacToePlayer2 {
                     input = stdIn.next();
                     fout.writeUTF(input);
                 }
-                System.out.println("P2: " + fin.readUTF());
+
+                input = fin.readUTF();
+                int count = 0;
+                for (int i = 4; i < input.length(); i++) {
+                    System.out.print(input.charAt(i)+" ");
+                    count++;
+                    if (count == 3) {
+                        System.out.println("");
+                        count = 0;
+                    }
+                }
+
+                //System.out.println("P2: " + fin.readUTF());
             }
 
         } catch (UnknownHostException e) {

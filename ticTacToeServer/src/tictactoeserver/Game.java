@@ -26,6 +26,17 @@ public class Game {
         return board;
     }
 
+    @Override
+    public String toString() {
+        String strBoard = null;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                strBoard =  strBoard + "" + this.board[i][j];
+            }
+        }
+        return strBoard;
+    }
+
     public void setBoard(int x, int y, Integer player) {
         if (this.board[x - 1][y - 1] == 0) {
             this.board[x - 1][y - 1] = player;
