@@ -27,10 +27,10 @@ public class Account {
     stmt.executeUpdate("INSERT INTO `PLAYERS`(ID,username,password,age,address,email,score) VALUE ('"+ID+"','"+username+"','"+password+"',"+age+",'"+address+"','"+email+"','"+score+"')");
          }
         static boolean login(String username, String password) throws SQLException
-        {
+        {   ResultSet Results = null;
             Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
             Statement stmt = conn.createStatement();
-             ResultSet Results= stmt.executeQuery("SELECT * from PLAYERS WHERE username like '"+username+"' and password like '"+password+"' ");
+             Results= stmt.executeQuery("SELECT * from PLAYERS WHERE username like '"+username+"' and password like '"+password+"' ");
            if(Results!=null)
             return true;
            else return false;
