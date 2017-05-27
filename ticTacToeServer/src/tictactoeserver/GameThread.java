@@ -47,14 +47,17 @@ public class GameThread implements Runnable {
             Integer x1 = 0, y1 = 0, x2 = 0, y2 = 0;
             String p1, p2;
 
-            fout1.writeUTF(game.toString());
+//            fout1.writeUTF(game.toString());
+//            fout2.writeUTF(game.toString());
+
             while (true) {
 
                 game.showBoard();
 
-                //Read Input    
+                //Read Input   
+                
                 if (player % 2 == 0) {                                          //player2
-                    fout2.writeUTF(game.toString());
+                    fout1.writeUTF(game.toString());
                     p2 = fin1.readUTF();
                     System.out.println(p2);
                     x2 = p2.charAt(0) - '0';
@@ -65,7 +68,8 @@ public class GameThread implements Runnable {
                     fout1.writeUTF(game.toString());
 
                     System.out.println(x2 + " " + y2);
-                } else {                                                        //player1                           
+                } else {                                                        //player1        
+                    fout2.writeUTF(game.toString());
                     p1 = fin2.readUTF();
                     System.out.println(p1);
                     x1 = p1.charAt(0) - '0';
@@ -73,7 +77,7 @@ public class GameThread implements Runnable {
                     game.setBoard(x1, y1, 1);
                     player++;
 //                    fout1.writeUTF(game.toString());
-//                    fout2.writeUTF(game.toString());
+                    fout2.writeUTF(game.toString());
 
                     System.out.println(x1 + " " + y1);
                 }

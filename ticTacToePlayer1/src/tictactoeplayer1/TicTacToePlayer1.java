@@ -34,13 +34,30 @@ public class TicTacToePlayer1 {
 
             while (true) {
                 String input;
-                if (stdIn.hasNext() != false) {
-                    input = stdIn.next();
-                    fout.writeUTF(input);
-                }
+                String output;
 
                 input = fin.readUTF();
                 int count = 0;
+                for (int i = 4; i < input.length(); i++) {
+                    System.out.print(input.charAt(i) + " ");
+                    count++;
+                    if (count == 3) {
+                        System.out.println("");
+                        count = 0;
+                    }
+                }
+                
+                System.out.println("");
+                System.out.println("");
+
+                if (stdIn.hasNext() != false) {
+                    output = stdIn.next();
+                    fout.writeUTF(output);
+                }
+
+                input = fin.readUTF();
+                //int count = 0;
+                count = 0;
                 for (int i = 4; i < input.length(); i++) {
                     System.out.print(input.charAt(i) + " ");
                     count++;
