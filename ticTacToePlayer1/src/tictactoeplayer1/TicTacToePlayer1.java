@@ -56,7 +56,6 @@ public class TicTacToePlayer1 {
                 }
 
                 input = fin.readUTF();
-                //int count = 0;
                 count = 0;
                 for (int i = 4; i < input.length(); i++) {
                     System.out.print(input.charAt(i) + " ");
@@ -66,8 +65,6 @@ public class TicTacToePlayer1 {
                         count = 0;
                     }
                 }
-
-                //System.out.println("P2: " + fin.readUTF());
             }
 
         } catch (UnknownHostException e) {

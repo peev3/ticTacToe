@@ -38,6 +38,7 @@ public class GameThread implements Runnable {
             // I/O streams
             DataInputStream fin1 = new DataInputStream(clientSocket1.getInputStream());
             DataOutputStream fout1 = new DataOutputStream(clientSocket1.getOutputStream());
+            
             DataInputStream fin2 = new DataInputStream(clientSocket2.getInputStream());
             DataOutputStream fout2 = new DataOutputStream(clientSocket2.getOutputStream());
 
@@ -46,9 +47,6 @@ public class GameThread implements Runnable {
             Integer player = 1;
             Integer x1 = 0, y1 = 0, x2 = 0, y2 = 0;
             String p1, p2;
-
-//            fout1.writeUTF(game.toString());
-//            fout2.writeUTF(game.toString());
 
             while (true) {
 
@@ -64,7 +62,6 @@ public class GameThread implements Runnable {
                     y2 = p2.charAt(1) - '0';
                     game.setBoard(x2, y2, 2);
                     player++;
-                    //fout2.writeUTF(game.toString());
                     fout1.writeUTF(game.toString());
 
                     System.out.println(x2 + " " + y2);
@@ -76,7 +73,6 @@ public class GameThread implements Runnable {
                     y1 = p1.charAt(1) - '0';
                     game.setBoard(x1, y1, 1);
                     player++;
-//                    fout1.writeUTF(game.toString());
                     fout2.writeUTF(game.toString());
 
                     System.out.println(x1 + " " + y1);
