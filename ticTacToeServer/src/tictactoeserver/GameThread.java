@@ -23,7 +23,7 @@ public class GameThread implements Runnable {
     public GameThread(int portNumber) throws IOException {
         this.serverSocket = new ServerSocket(portNumber);
         this.portNumber = portNumber;
-        
+
     }
 
     @Override
@@ -31,14 +31,14 @@ public class GameThread implements Runnable {
 
         try {
             //server initialize
-            
+
             Socket clientSocket1 = serverSocket.accept();
             Socket clientSocket2 = serverSocket.accept();
 
             // I/O streams
             DataInputStream fin1 = new DataInputStream(clientSocket1.getInputStream());
             DataOutputStream fout1 = new DataOutputStream(clientSocket1.getOutputStream());
-            
+
             DataInputStream fin2 = new DataInputStream(clientSocket2.getInputStream());
             DataOutputStream fout2 = new DataOutputStream(clientSocket2.getOutputStream());
 
@@ -53,7 +53,6 @@ public class GameThread implements Runnable {
                 game.showBoard();
 
                 //Read Input   
-                
                 if (player % 2 == 0) {                                          //player2
                     fout1.writeUTF(game.toString());
                     p2 = fin1.readUTF();

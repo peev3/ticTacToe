@@ -6,7 +6,7 @@
 package tictactoeplayer1;
 
 /**
- * @author Asus1
+ * @author Asus
  */
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -46,7 +46,7 @@ public class TicTacToePlayer1 {
                         count = 0;
                     }
                 }
-                
+
                 System.out.println("");
                 System.out.println("");
 

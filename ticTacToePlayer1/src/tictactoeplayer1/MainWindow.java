@@ -5,9 +5,6 @@
  */
 package tictactoeplayer1;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-
 /**
  *
  * @author Maya
