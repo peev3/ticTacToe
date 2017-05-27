@@ -7,6 +7,9 @@ package tictactoeplayer1;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -43,6 +46,7 @@ public class StartupWindow extends javax.swing.JFrame {
         PasswordLabel = new javax.swing.JLabel();
         PasswordField = new javax.swing.JTextField();
         LoginButton = new javax.swing.JButton();
+        RegisterButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,6 +74,13 @@ public class StartupWindow extends javax.swing.JFrame {
             }
         });
 
+        RegisterButton.setText("Register");
+        RegisterButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RegisterButtonMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,11 +97,13 @@ public class StartupWindow extends javax.swing.JFrame {
                             .addComponent(UsernameField)
                             .addComponent(PasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(156, 156, 156)
-                        .addComponent(LoginButton))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(72, 72, 72)
-                        .addComponent(TitleField, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(TitleField, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(156, 156, 156)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(LoginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(RegisterButton, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE))))
                 .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -107,8 +120,10 @@ public class StartupWindow extends javax.swing.JFrame {
                     .addComponent(PasswordLabel)
                     .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(31, 31, 31)
-                .addComponent(LoginButton)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addComponent(LoginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(RegisterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
@@ -123,9 +138,25 @@ public class StartupWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_TitleFieldActionPerformed
 
     private void LoginHandler(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginHandler
+            
+        String username= UsernameField.getText();
+        String password= PasswordField.getText();
             dispose();
-            new MainWindow();
+         try {
+             if(Account.login(username,password)==true)
+                 new MainWindow(username, password).setVisible(true);
+             else
+                 new StartupWindow().setVisible(true);
+         } catch (SQLException ex) {
+             Logger.getLogger(StartupWindow.class.getName()).log(Level.SEVERE, null, ex);
+         }
+            
     }//GEN-LAST:event_LoginHandler
+
+    private void RegisterButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RegisterButtonMouseClicked
+            dispose(); 
+            new RegisterWindow().setVisible(true);
+    }//GEN-LAST:event_RegisterButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -168,6 +199,7 @@ public class StartupWindow extends javax.swing.JFrame {
     private javax.swing.JButton LoginButton;
     private javax.swing.JTextField PasswordField;
     private javax.swing.JLabel PasswordLabel;
+    private javax.swing.JButton RegisterButton;
     private javax.swing.JTextField TitleField;
     private javax.swing.JTextField UsernameField;
     private javax.swing.JLabel UsernameLabel;
