@@ -23,7 +23,6 @@ public class GameThread implements Runnable {
 
     int portNumber;
     ServerSocket serverSocket;
-    
 
     public GameThread(int portNumber) throws IOException {
         this.serverSocket = new ServerSocket(portNumber);
@@ -46,13 +45,13 @@ public class GameThread implements Runnable {
 
             DataInputStream fin2 = new DataInputStream(clientSocket2.getInputStream());
             DataOutputStream fout2 = new DataOutputStream(clientSocket2.getOutputStream());
-               Scanner sc= new Scanner(System.in);
+            Scanner sc = new Scanner(System.in);
             //Game variables
             Game game = new Game();
             Integer player = 1;
             Integer x1 = 0, y1 = 0, x2 = 0, y2 = 0;
             String p1, p2;
-            
+
             while (true) {
 
                 game.showBoard();
@@ -85,12 +84,19 @@ public class GameThread implements Runnable {
                 if (game.endGame() != 0) {
                     game.showBoard();
                     int winner = game.endGame();
-                    if (winner == 1 || winner == 2) {
-                        System.out.println(winner + " won ");
+                    if (winner == 1) {
+                        fout1.writeUTF("Player 1 won!");
+                        System.out.println("Player 1 won");
                     } else {
-                        System.out.println("Draw");
+                        if (winner == 2) {
+                            fout2.writeUTF("Player 2 won!");
+                            System.out.println("Player 1 won");
+                        } else {
+                            System.out.println("Draw");
+                        }
                     }
                     break;
+
                 }
             }
         } catch (IOException e) {
