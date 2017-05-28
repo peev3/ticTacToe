@@ -44,6 +44,7 @@ public class TicTacToePlayer1 {
                     String password = stdIn.next();
                     if (Account.login(username, password) == false) {
                         ok = 1;
+                        System.out.println("Username or password are incorect");
                     } else {
                         ok = 0;
                     }
