@@ -16,7 +16,7 @@ public class Account {
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/GAME";
-    static final String USER = "matzuu";
+    static final String USER = "User";
     static final String PASS = "123456";
 
     static void register(String username, String password, String email) throws ClassNotFoundException, SQLException {

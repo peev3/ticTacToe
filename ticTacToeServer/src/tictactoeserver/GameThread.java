@@ -85,13 +85,18 @@ public class GameThread implements Runnable {
                     game.showBoard();
                     int winner = game.endGame();
                     if (winner == 1) {
-                        fout1.writeUTF("Player 1 won!");
+                            fout2.writeUTF("    1 won");
+                            fout1.writeUTF("    1 won");
                         System.out.println("Player 1 won");
                     } else {
                         if (winner == 2) {
-                            fout2.writeUTF("Player 2 won!");
-                            System.out.println("Player 1 won");
+
+                            fout2.writeUTF("    2 won");
+                            fout1.writeUTF("    2 won");
+                            System.out.println("Player 2 won");
                         } else {
+                            fout2.writeUTF("Draw");
+                            fout1.writeUTF("Draw");
                             System.out.println("Draw");
                         }
                     }

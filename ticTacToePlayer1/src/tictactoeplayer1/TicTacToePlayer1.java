@@ -96,14 +96,18 @@ public class TicTacToePlayer1 {
                 }
 
                 input = fin.readUTF();
-                count = 0;
-                for (int i = 4; i < input.length(); i++) {
-                    System.out.print(input.charAt(i) + " ");
-                    count++;
-                    if (count == 3) {
-                        System.out.println("");
-                        count = 0;
+                if (!input.equals("    1 won")||!input.equals("    2 won")) {
+                    count = 0;
+                    for (int i = 4; i < input.length(); i++) {
+                        System.out.print(input.charAt(i) + " ");
+                        count++;
+                        if (count == 3) {
+                            System.out.println("");
+                            count = 0;
+                        }
                     }
+                } else {
+                    System.out.println(input);
                 }
             }
 
