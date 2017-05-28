@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tictactoeplayer1;
+package tictactoeplayer2;
 //import static database.Database.DB_URL;
 
 import java.sql.*;

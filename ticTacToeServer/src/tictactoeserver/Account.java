@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tictactoeplayer1;
+package tictactoeserver;
 //import static database.Database.DB_URL;
 
 import java.sql.*;
@@ -39,17 +39,20 @@ public class Account {
         Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
         Statement stmt = conn.createStatement();
 
-        Results = stmt.executeQuery("SELECT USERNAME,PASSWORD from PLAYERS WHERE username like '"
+        Results = stmt.executeQuery("SELECT * from PLAYERS WHERE username like '"
                 + username
                 + "' and password like '"
                 + password + "' ");
 
-        while (Results.next()) {
-            if (Results.getString("USERNAME") == username) {
-                return true;
+        if (Results.wasNull()) {
+            return false;
+        } else {
+            while (Results.next()) {
+                if ((Results.getString("USERNAME") == username) && (Results.getString("PASSWORD") == password)) {
+                    return true;
+                }
             }
         }
-
         return false;
 
     }

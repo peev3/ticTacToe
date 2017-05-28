@@ -42,11 +42,11 @@ public class TicTacToeServer {
 
             //Delete to prevent already existing table error
             stmt = conn.createStatement();
-            stmt.executeUpdate("DROP DATABASE GAME");
+            
 
             //Creating Database
             System.out.println("Creating database...");
-            stmt.executeUpdate("CREATE DATABASE GAME");
+            stmt.executeUpdate("CREATE DATABASE IF NOT EXISTS GAME");
             System.out.println("Database created successfully...");
 
             //Connecting to the new database
@@ -56,19 +56,17 @@ public class TicTacToeServer {
             //Creating Table
             System.out.println("Creating table");
 
-            String sql2 = "CREATE TABLE PLAYERS( ID INT NOT NULL, "
-                    + "USERNAME VARCHAR (20) NOT NULL, "
+            String sql2 = "CREATE TABLE IF NOT EXISTS PLAYERS(USERNAME VARCHAR (20) NOT NULL, "
                     + "PASSWORD VARCHAR (20) NOT NULL, "
-                    + "AGE  INT NOT NULL, "
-                    + "ADDRESS  CHAR (25), "
                     + "EMAIL CHAR(25), "
-                    + "SCORE INT, PRIMARY KEY (ID))";
+                    + "SCORE INT, PRIMARY KEY (USERNAME))";
 
             stmt2.executeUpdate(sql2);
             System.out.println("Table created succesfully");
 
             int portNumber = 8050;
 
+            
             GameThread r = new GameThread(portNumber);
             new Thread(r).start();
 

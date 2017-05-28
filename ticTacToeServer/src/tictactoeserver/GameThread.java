@@ -10,6 +10,10 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,6 +23,7 @@ public class GameThread implements Runnable {
 
     int portNumber;
     ServerSocket serverSocket;
+    
 
     public GameThread(int portNumber) throws IOException {
         this.serverSocket = new ServerSocket(portNumber);
@@ -41,13 +46,13 @@ public class GameThread implements Runnable {
 
             DataInputStream fin2 = new DataInputStream(clientSocket2.getInputStream());
             DataOutputStream fout2 = new DataOutputStream(clientSocket2.getOutputStream());
-
+               Scanner sc= new Scanner(System.in);
             //Game variables
             Game game = new Game();
             Integer player = 1;
             Integer x1 = 0, y1 = 0, x2 = 0, y2 = 0;
             String p1, p2;
-
+            
             while (true) {
 
                 game.showBoard();

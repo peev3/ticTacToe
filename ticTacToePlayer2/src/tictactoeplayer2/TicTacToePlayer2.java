@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class TicTacToePlayer2 {
@@ -21,14 +22,52 @@ public class TicTacToePlayer2 {
     /**
      * @param args the command line arguments
      * @throws java.io.IOException
+     * @throws java.sql.SQLException
+     * @throws java.lang.ClassNotFoundException
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, SQLException, ClassNotFoundException {
 
+        Scanner stdIn = new Scanner(System.in);
         int portNumber = 8050;
+        System.out.println("Login or Register?");
+        String answer = stdIn.next();
+        answer = answer.toLowerCase();
+
+        switch (answer) {
+            case "login": {
+                int ok = 1;
+                while (ok == 1) {
+                    System.out.println("Login:");
+                    System.out.println("Username");
+                    String username = stdIn.next();
+                    System.out.println("Password");
+                    String password = stdIn.next();
+                    if (Account.login(username, password) == false) {
+                        ok = 1;
+                    } else {
+                        ok = 0;
+                    }
+                }
+                break;
+            }
+            case "register": {
+                System.out.println("Login:");
+                System.out.println("Username");
+                String username = stdIn.next();
+                System.out.println("Password");
+                String password = stdIn.next();
+                System.out.println("Email");
+                String email = stdIn.next();
+                Account.register(username, password, email);
+                break;
+            }
+            default:
+                System.out.println("not good");
+                break;
+        }
+
         try {
             Socket serverSocket = new Socket(InetAddress.getByName("localhost"), portNumber);
-            Scanner stdIn = new Scanner(System.in);
-
             DataInputStream fin = new DataInputStream(serverSocket.getInputStream());
             DataOutputStream fout = new DataOutputStream(serverSocket.getOutputStream());
 
